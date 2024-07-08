@@ -2,11 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import Produto from "../interfaces/produto";
 import { URL_PRODUTO } from "../util/constants";
 import useAPI from "./useAPI";
+import React, { useState, useEffect } from 'react';
 
 interface QueryString {
   pagina: number;
   tamanho: number;
   nome: string;
+  filtro: number;
 }
 
 const useProdutosComPaginacao = (query: QueryString) => {

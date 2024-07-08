@@ -2,42 +2,53 @@ import dayjs from "dayjs";
 import useProdutosComPaginacao from "../hooks/useProdutosComPaginacao";
 import useProdutoStore from "../store/produtoStore";
 import "../index.css"
+import { useState } from 'react';
+
 
 const TabelaDeProdutos = () => {
   const pagina = useProdutoStore((s) => s.pagina);
   const tamanho = useProdutoStore((s) => s.tamanho);
   const nome = useProdutoStore((s) => s.nome);
+  const [filtro, setFiltro] = useState(0);
 
   
   const {
     data: resultadoPaginado,
     isPending: carregandoProdutos,
     error: errorProdutos,
-  } = useProdutosComPaginacao({ pagina, tamanho, nome });
+  } = useProdutosComPaginacao({ pagina, tamanho, nome, filtro});
 
   if (carregandoProdutos) return <h6>Carregando...</h6>;
   if (errorProdutos) throw errorProdutos;
 
-  let produtos = resultadoPaginado.itens;
+  const produtos = resultadoPaginado.itens;
 
+  function filter(sortType: number){
+    if(filtro == sortType){
+      setFiltro(sortType+6)
+    }
+    else{
+      setFiltro(sortType)
+    }
+    console.log(filtro)
+  }
 
-  console.log(produtos)
   return (
 
     <table className="table table-responsive table-sm table-hover table-bordered">
       <thead>
         <tr>
           <th className="align-middle text-center">Imagem</th>
-          <th className="align-middle text-center">Categoria</th>
-          <th className="align-middle text-center">Nome</th>
+          <th className="align-middle text-center"><a onClick={() => filter(1)}>Categoria</a></th>
+          <th className="align-middle text-center"><a onClick={() => filter(2)}>Nome </a></th>
           <th className="align-middle text-center">Tamanho</th>
-          <th className="align-middle text-center">Data de Cadastro</th>
-          <th className="align-middle text-center">Quantidade</th>
-          <th className="align-middle text-center">Preco</th>
+          <th className="align-middle text-center"><a onClick={() => filter(3)}>Data de Cadastro</a></th>
+          <th className="align-middle text-center"><a onClick={() => filter(4)}>Quantidade</a></th>
+          <th className="align-middle text-center" ><a onClick={() => filter(5)}>Preço</a></th>
         </tr>
       </thead>
       <tbody>
-        {produtos.map((produto) => (
+        {produtos?.map((produto) => (
           <tr key={produto.id}>
             <td width="18%" className="align-middle text-center">
               <img src={produto.imagem} width={45} />

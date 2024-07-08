@@ -4,17 +4,20 @@ import useProdutosComPaginacao from "../hooks/useProdutosComPaginacao";
 import useProdutoStore from "../store/produtoStore";
 import useRemoverProduto from "../hooks/useRemoverProduto";
 import "../index.css"
+import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSort } from '@fortawesome/free-solid-svg-icons'
 
 
 const TabelaDeProdutosPrivado = () => {
   const pagina = useProdutoStore((s) => s.pagina);
   const tamanho = useProdutoStore((s) => s.tamanho);
   const nome = useProdutoStore((s) => s.nome);
+  const [filtro, setFiltro] = useState(0);
   const setPagina = useProdutoStore((s) => s.setPagina);
   const setProdutoSelecionado = useProdutoStore((s) => s.setProdutoSelecionado);
 
   const removerProduto = useRemoverProduto();
-
 
   const tratarRemocao = (id: number) => {
     removerProduto.mutate(id)
@@ -32,7 +35,7 @@ const TabelaDeProdutosPrivado = () => {
     data: resultadoPaginado,
     isPending: carregandoProdutos,
     error: errorProdutos,
-  } = useProdutosComPaginacao({ pagina, tamanho, nome });
+  } = useProdutosComPaginacao({ pagina, tamanho, nome , filtro});
 
   if (carregandoProdutos) return <h6>Carregando...</h6>;
   if (errorProdutos) throw errorProdutos;
@@ -40,20 +43,32 @@ const TabelaDeProdutosPrivado = () => {
   let produtos = resultadoPaginado.itens;
 
 
-  console.log(produtos)
+  function filter(sortType: number){
+    if(filtro == sortType){
+      setFiltro(sortType+6)
+    }
+    else{
+      setFiltro(sortType)
+    }
+    setPagina(0);
+    console.log(filtro)
+  }
+
+
+
   return (
 
     <table className="table table-responsive table-sm table-hover table-bordered">
       <thead>
         <tr>
-          <th className="align-middle text-center">Id</th>
+        <th className="align-middle text-center">Id <a onClick={() => filter(0)}><FontAwesomeIcon icon={faSort} /></a></th>
           <th className="align-middle text-center">Imagem</th>
-          <th className="align-middle text-center">Categoria</th>
-          <th className="align-middle text-center">Nome (Clique para Alterar)</th>
+          <th className="align-middle text-center">Categoria <a onClick={() => filter(1)}><FontAwesomeIcon icon={faSort} /></a></th>
+          <th className="align-middle text-center">Nome <a onClick={() => filter(2)}><FontAwesomeIcon icon={faSort} /></a></th>
           <th className="align-middle text-center">Tamanho</th>
-          <th className="align-middle text-center">Data de Cadastro</th>
-          <th className="align-middle text-center">Quantidade</th>
-          <th className="align-middle text-center">Preço</th>
+          <th className="align-middle text-center">Data de Cadastro <a onClick={() => filter(3)}><FontAwesomeIcon icon={faSort} /></a></th>
+          <th className="align-middle text-center">Quantidade <a onClick={() => filter(4)}><FontAwesomeIcon icon={faSort} /></a></th>
+          <th className="align-middle text-center" >Preço <a onClick={() => filter(5)}><FontAwesomeIcon icon={faSort} /></a></th>
           <th className="align-middle text-center">Ação</th>
         </tr>
       </thead>
@@ -63,13 +78,13 @@ const TabelaDeProdutosPrivado = () => {
             <td width="8%" className="align-middle text-center">
               {produto.id}
             </td>
-            <td width="10%" className="align-middle text-center">
+            <td width="7%" className="align-middle text-center">
               <img src={produto.imagem} width={45} />
             </td>
             <td width="10%" className="align-middle text-center">
               {produto.categoria.nome}
             </td>
-            <td width="20%" className="align-middle text-center">
+            <td width="16%" className="align-middle text-center">
               <a
                 className="link-underline"
                 onClick={() => {
@@ -82,10 +97,10 @@ const TabelaDeProdutosPrivado = () => {
             <td width="10%" className="align-middle text-center">
               {produto.tamanho}
             </td>
-            <td width="12%" className="align-middle text-center">
+            <td width="15%" className="align-middle text-center">
               {dayjs(produto.dataCadastro).format("DD/MM/YYYY")}
             </td>
-            <td width="8%" className="align-middle text-center">
+            <td width="12%" className="align-middle text-center">
               {produto.qtdEstoque.toLocaleString("pt-BR", {
                 useGrouping: true,
               })}
