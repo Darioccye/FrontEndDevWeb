@@ -14,12 +14,15 @@ const TabelaDeProdutosPrivado = () => {
   const tamanho = useProdutoStore((s) => s.tamanho);
   const nome = useProdutoStore((s) => s.nome);
   const [filtro, setFiltro] = useState(0);
+  const [identificador, setIdentificador] = useState(0)
+
   const setPagina = useProdutoStore((s) => s.setPagina);
   const setProdutoSelecionado = useProdutoStore((s) => s.setProdutoSelecionado);
 
   const removerProduto = useRemoverProduto();
 
   const tratarRemocao = (id: number) => {
+    setIdentificador(id)
     removerProduto.mutate(id)
     setPagina(0);
   };
@@ -114,11 +117,10 @@ const TabelaDeProdutosPrivado = () => {
             </td>
             <td width="12%" className="align-middle text-center">
             <button id="btn" onClick={() => tratarRemocao(produto.id!) } className="btn btn-danger btn-sm" >
-            {!teste(removerProduto.isPending) ? (
-        <img src={deleteIcon} alt="Imagem do Botão" className="button-image"/>
-      ) : (
-        <div className="spinner"></div>
-      )} Remover
+            {removerProduto.isPending && produto.id == identificador ? (
+        <div className="spinner-active"></div>
+      ) : <img src={deleteIcon} alt="Imagem do Botão" className="button-image"/>}
+       Remover
                 </button>
             </td>
           </tr>
