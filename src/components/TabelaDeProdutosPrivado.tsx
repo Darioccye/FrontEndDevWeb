@@ -27,12 +27,6 @@ const TabelaDeProdutosPrivado = () => {
     setPagina(0);
   };
 
-  function teste(bol: boolean){
-    if(bol){
-      return true
-    }
-    return false
-  }
   
   const {
     data: resultadoPaginado,
