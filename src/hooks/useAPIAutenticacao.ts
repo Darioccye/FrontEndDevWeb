@@ -12,7 +12,7 @@ const useAPIAutenticacao = () => {
   // Envia um Usuario com conta e senha e recebe de volta um Token
   const login = (usuario: Usuario) =>
     axiosInstance
-      .post<TokenResponse>(URL_AUTENTICACAO + "/login", usuario)
+      .post<number>(URL_AUTENTICACAO + "/login", usuario)
       .then((res) => res.data)
       .catch((error) => {
         if (error.response) {
@@ -39,7 +39,7 @@ const useAPIAutenticacao = () => {
         }
       });
 
-      const idConta = (usuario: Usuario) =>
+      /* const idConta = (usuario: Usuario) =>
         axiosInstance
           .get<number>(URL_AUTENTICACAO + "/conta", {data: usuario})
           .then((res) => res.data)
@@ -66,7 +66,7 @@ const useAPIAutenticacao = () => {
               // erro desconhecido
               throw error;
             }
-          });
+          }); */
 
 
   return { login };

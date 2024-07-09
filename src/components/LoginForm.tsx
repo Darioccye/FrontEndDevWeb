@@ -19,6 +19,7 @@ type FormLogin = z.infer<typeof schema>;
 const LoginForm = () => {
   const setUsuarioLogado = useUsuarioStore((s) => s.setUsuarioLogado);
   const setTentouLogar = useUsuarioStore((s) => s.setTentouLogar);
+  const setIdUsuario = useUsuarioStore((s) => s.setIdUsuario);
   const tentouLogar = useUsuarioStore((s) => s.tentouLogar);
 
   const location = useLocation();
@@ -43,9 +44,9 @@ const LoginForm = () => {
     const usuario: Usuario = { conta, senha };
 
     efetuarLogin(usuario, {
-      onSuccess: (tokenResponse: TokenResponse) => {
+      onSuccess: (idUsuario: number) => {
         setUsuarioLogado(conta);
-        console.log(tokenResponse);
+        setIdUsuario(idUsuario);
 
         if (location.state && location.state.from) {
           navigate(location.state.from);

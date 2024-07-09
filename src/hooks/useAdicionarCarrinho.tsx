@@ -1,14 +1,20 @@
 import useAPICarrinho from "./useAPICarrinho"
 import { URL_CARRINHO} from "../util/constants";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-const useAdicionarCarrinho = (idUsuario: number, idProduto: number) => {
+const useAdicionarCarrinho = (idUsuario: number) => {
     const { adicionarCarrinho } = useAPICarrinho(URL_CARRINHO);
     
-    return useQuery({
-        queryKey: ["carrinho", "adicionar", idUsuario, idProduto ],
-        queryFn: () => adicionarCarrinho(idUsuario, idProduto),
-        staleTime: 10_000,
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (idProduto:number) => adicionarCarrinho(idUsuario, idProduto),
+
+        onSuccess: () =>
+            queryClient.invalidateQueries({
+                queryKey: ["carrinho"],
+            })
     })
+
 }
 export default useAdicionarCarrinho

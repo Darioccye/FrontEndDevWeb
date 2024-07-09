@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { URL_BASE } from "../util/constants";
 import CustomError from "../util/CustomError";
 import Usuario from "../interfaces/usuario";
+import Produto from "../interfaces/produto";
 
 const useAPICarrinho = (endpoint: string) => {
 
@@ -10,7 +11,7 @@ const useAPICarrinho = (endpoint: string) => {
     });
 
     const recuperarProdutosCarrinho = (idUsuario: number) => axiosInstance
-        .get(endpoint + '/' + idUsuario)
+        .get(endpoint + "/" + idUsuario)
         .then((response) => response.data)
         .catch((error) => {
             if (error.response) {
@@ -91,7 +92,7 @@ const useAPICarrinho = (endpoint: string) => {
         })
 
     const adicionarCarrinho = (idUsuario: number, idProduto: number) => axiosInstance
-        .post(endpoint + "/add/" + idUsuario + "/" + idProduto)
+        .put(endpoint + "/add/" + idUsuario + "/" + idProduto)
         .then((response) => response.data)
         .catch((error) => {
             console.log(error.response);

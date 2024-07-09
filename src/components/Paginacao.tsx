@@ -1,10 +1,12 @@
 import useProdutosComPaginacao from "../hooks/useProdutosComPaginacao";
 import useProdutoStore from "../store/produtoStore";
+import { useState } from "react";
 
 const Paginacao = () => {
   const pagina = useProdutoStore((s) => s.pagina);
   const tamanho = useProdutoStore((s) => s.tamanho);
   const nome = useProdutoStore((s) => s.nome);
+  const [filtro, setFiltro] = useState(0);
   const setPagina = useProdutoStore((s) => s.setPagina);
 
   const tratarPaginacao = (pagina: number) => {
@@ -15,7 +17,7 @@ const Paginacao = () => {
     data: resultadoPaginado,
     isPending: carregandoProdutos,
     error: errorProdutos,
-  } = useProdutosComPaginacao({ pagina, tamanho, nome });
+  } = useProdutosComPaginacao({ pagina, tamanho, nome, filtro});
 
   if (carregandoProdutos) return <h6>Carregando...</h6>;
   if (errorProdutos) throw errorProdutos;
