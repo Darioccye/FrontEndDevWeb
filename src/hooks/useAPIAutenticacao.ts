@@ -39,6 +39,36 @@ const useAPIAutenticacao = () => {
         }
       });
 
+      const idConta = (usuario: Usuario) =>
+        axiosInstance
+          .get<number>(URL_AUTENTICACAO + "/conta", {data: usuario})
+          .then((res) => res.data)
+          .catch((error) => {
+            if (error.response) {
+              // significa que o servidor respondeu, porém com erro
+              if (error.response.data.errorCode === 422) {
+                throw new CustomError(
+                  error.response.data.message,
+                  error.response.data.errorCode,
+                  Object.values(error.response.data.map)
+                );
+              }
+    
+              // console.log("Vai instanciar um CustomError (message, errorCode)",
+              // error.response.data.message,
+              // error.response.data.errorCode);
+    
+              throw new CustomError(error.response.data.message, error.response.data.errorCode);
+            } else if (error.request) {
+              // significa que a requisição foi enviada mas o servidor não respondeu
+              throw error;
+            } else {
+              // erro desconhecido
+              throw error;
+            }
+          });
+
+
   return { login };
 };
 

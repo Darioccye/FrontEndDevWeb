@@ -27,9 +27,6 @@ const ProdutoIndividual = () => {
 
   if (carregandoProdutos) return <h6>Carregando...</h6>;
   if (errorprodutos) throw errorprodutos;
-  
-  console.log(data.nome)
-  console.log(id)
 
   const alterar = (produto: Produto) => {
     setProdutoSelecionado(produto)
@@ -52,9 +49,9 @@ const ProdutoIndividual = () => {
         <img src={"../" + data.imagem} width={'300px'}>
         </img>
         <div className="row" style={{padding:"30px"}}>
-            <h5>
+            <h4 style={{fontWeight:"bold"}}>
               ID: {data.id}
-            </h5>
+            </h4>
             <h5>
               Nome: {data.nome}  
             </h5>

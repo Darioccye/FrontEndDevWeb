@@ -48,7 +48,6 @@ const TabelaDeProdutosPrivado = () => {
       setFiltro(sortType)
     }
     setPagina(0);
-    console.log(filtro)
   }
 
 

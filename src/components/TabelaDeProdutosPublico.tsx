@@ -30,7 +30,6 @@ const TabelaDeProdutos = () => {
     else{
       setFiltro(sortType)
     }
-    console.log(filtro)
   }
 
   return (
