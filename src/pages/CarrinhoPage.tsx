@@ -44,17 +44,19 @@ const CarrinhoPage = () => {
     error: errortotal,
   } = useTotalCarrinho(idUsuario)
 
+  const {
+    data: listaQuantidade,
+    isPending: carregandoQuantidade,
+    error: errorquantidade,
+  } = useRecuperarQuantidadeCarrinho(idUsuario);
+
+
   const totalFormatado = totalCarrinho !== undefined ? totalCarrinho.toLocaleString("pt-BR", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
     useGrouping: true,
   }): '';
 
-  const {
-    data: listaQuantidade,
-    isPending: carregandoQuantidade,
-    error: errorquantidade,
-  } = useRecuperarQuantidadeCarrinho(idUsuario);
 
 
   if (carregandoTotal) return <h6>Carregando...</h6>;
@@ -78,56 +80,48 @@ const CarrinhoPage = () => {
     tratarRemocao(idProduto)
   }
 
-  function printCarrinho(){
-    console.log(listaProdutos)
-    console.log(listaQuantidade)
-  }
-
 
 
   return (
+    //As cores do background tiveram que ficar no style pois, quando eu mudava no index.css, nada acontecia.
     <div>
-    <table className="table table-responsive table-sm table-hover" style={{ backgroundColor: 'rgb(187, 187, 187)' }}>
+    <table className="table table-responsive table-sm table-hover" style={{backgroundColor:"#CCCCCC", borderColor:"#AAAAAA"}}>
           <thead>
             <tr>
-            <th className="align-middle text-center">ID</th>
-              <th className="align-middle text-center"></th>
-              <th className="align-middle text-center">Nome do Produto</th>
-              <th className="align-middle text-center">Tamanho</th>
-              <th className="align-middle text-center">Quantidade</th>
-              <th className="align-middle text-center" >Preço Unitário</th>
-              <th className="align-middle text-center" >Preço Total</th>
+              <th className="align-middle text-center"style={{backgroundColor:"#CCCCCC"}}></th>
+              <th className="align-middle text-center"style={{backgroundColor:"#CCCCCC"}}>Nome do Produto</th>
+              <th className="align-middle text-center"style={{backgroundColor:"#CCCCCC"}}>Tamanho</th>
+              <th className="align-middle text-center"style={{backgroundColor:"#CCCCCC"}}>Quantidade</th>
+              <th className="align-middle text-center" style={{backgroundColor:"#CCCCCC"}}>Preço Unitário</th>
+              <th className="align-middle text-center" style={{backgroundColor:"#CCCCCC"}}>Preço Total</th>
             </tr>
           </thead>
           <tbody>
             {listaProdutos.map((produto, indice) => (
               <tr key={produto.id}>
-                <td width="10%" className="align-middle text-center">
-                    {produto.id}
-                </td>
-                <td width="10%" className="align-middle text-center">
+                <td width="20%" className="align-middle text-center"style={{backgroundColor:"#DDDDDD"}}>
                   <img src={produto.imagem} width={100} />
                 </td>
-                <td width="10%" className="align-middle text-center">
+                <td width="15%" className="align-middle text-center"style={{backgroundColor:"#DDDDDD"}}>
                     {produto.nome}
                 </td>
-                <td width="10%" className="align-middle text-center">
+                <td width="15%" className="align-middle text-center"style={{backgroundColor:"#DDDDDD"}}>
                   {produto.tamanho}
                 </td>
-                <td width="12%" className="align-middle text-center">
+                <td width="20%" className="align-middle text-center"style={{backgroundColor:"#DDDDDD"}}>
                  <a onClick={() => subtrairProduto(produto.id!)} style={{margin:"5px"}}><FontAwesomeIcon icon={faCircleMinus}/></a>
                       {listaQuantidade[indice]}
                    <a onClick={() => adicionarProduto(produto.id!)} style={{margin:"5px"}}><FontAwesomeIcon icon={faCirclePlus}/>
                     </a> 
                 </td>
-                <td width="10%" className="align-middle text-center">  
+                <td width="12%" className="align-middle text-center"style={{backgroundColor:"#DDDDDD"}}>  
                   {produto.preco.toLocaleString("pt-BR", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                     useGrouping: true,
                   })}
                 </td>
-                <td width="12%" className="align-middle text-center">
+                <td width="25%" className="align-middle text-center"style={{backgroundColor:"#DDDDDD"}}>
                   {(produto.preco*listaQuantidade[indice]).toLocaleString("pt-BR", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
@@ -137,12 +131,12 @@ const CarrinhoPage = () => {
               </tr>
             ))}
           </tbody>
-          <tfoot style= {{transform:"translateX(73%)"}}>
+          <tfoot style= {{transform:"translateX(65%)"}}>
             <tr>
-            <td style={{fontWeight:"bold", fontSize: "25px"}}>
+            <td style={{fontWeight:"bold", fontSize: "25px", backgroundColor:"#CCCCCC"}}>
               Total: 
             </td>
-            <td style={{fontWeight:"bold", fontSize: "25px"}}>
+            <td style={{fontWeight:"bold", fontSize: "25px", backgroundColor:"#CCCCCC"}}>
               R$ {totalFormatado}
               </td>
               </tr>

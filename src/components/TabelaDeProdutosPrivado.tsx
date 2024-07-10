@@ -53,34 +53,35 @@ const TabelaDeProdutosPrivado = () => {
 
 
   return (
+    //As cores do background tiveram que ficar no style pois, quando eu mudava no index.css, nada acontecia.
 
-    <table className="table table-responsive table-sm table-hover table-bordered">
-      <thead>
+    <table className="table table-responsive table-sm table-hover table-bordered" style={{backgroundColor:"#CCCCCC", borderColor:"#AAAAAA"}}>
+      <thead style={{backgroundColor:"#04AA6D"}}>
         <tr>
-        <th className="align-middle text-center">Id <a onClick={() => filter(0)}><FontAwesomeIcon icon={faSort} /></a></th>
-          <th className="align-middle text-center">Imagem</th>
-          <th className="align-middle text-center">Categoria <a onClick={() => filter(1)}><FontAwesomeIcon icon={faSort} /></a></th>
-          <th className="align-middle text-center">Nome <a onClick={() => filter(2)}><FontAwesomeIcon icon={faSort} /></a></th>
-          <th className="align-middle text-center">Tamanho</th>
-          <th className="align-middle text-center">Data de Cadastro <a onClick={() => filter(3)}><FontAwesomeIcon icon={faSort} /></a></th>
-          <th className="align-middle text-center">Quantidade <a onClick={() => filter(4)}><FontAwesomeIcon icon={faSort} /></a></th>
-          <th className="align-middle text-center" >Preço <a onClick={() => filter(5)}><FontAwesomeIcon icon={faSort} /></a></th>
-          <th className="align-middle text-center">Ação</th>
+        <th className="align-middle text-center" style={{backgroundColor:"#CCCCCC"}}>Id <a onClick={() => filter(0)}><FontAwesomeIcon icon={faSort} /></a></th>
+          <th className="align-middle text-center" style={{backgroundColor:"#CCCCCC"}}>Imagem</th>
+          <th className="align-middle text-center" style={{backgroundColor:"#CCCCCC"}}>Categoria <a onClick={() => filter(1)}><FontAwesomeIcon icon={faSort} /></a></th>
+          <th className="align-middle text-center" style={{backgroundColor:"#CCCCCC"}}>Nome <a onClick={() => filter(2)}><FontAwesomeIcon icon={faSort} /></a></th>
+          <th className="align-middle text-center" style={{backgroundColor:"#CCCCCC"}}>Tamanho</th>
+          <th className="align-middle text-center" style={{backgroundColor:"#CCCCCC"}}>Data de Cadastro <a onClick={() => filter(3)}><FontAwesomeIcon icon={faSort} /></a></th>
+          <th className="align-middle text-center" style={{backgroundColor:"#CCCCCC"}}>Quantidade <a onClick={() => filter(4)}><FontAwesomeIcon icon={faSort} /></a></th>
+          <th className="align-middle text-center" style={{backgroundColor:"#CCCCCC"}}>Preço <a onClick={() => filter(5)}><FontAwesomeIcon icon={faSort} /></a></th>
+          <th className="align-middle text-center" style={{backgroundColor:"#CCCCCC"}}>Ação</th>
         </tr>
       </thead>
       <tbody>
         {produtos.map((produto) => (
           <tr key={produto.id}>
-            <td width="8%" className="align-middle text-center">
+            <td width="8%" className="align-middle text-center" style={{backgroundColor:"#DDDDDD"}}>
               {produto.id}
             </td>
-            <td width="7%" className="align-middle text-center">
+            <td width="7%" className="align-middle text-center" style={{backgroundColor:"#DDDDDD"}}>
               <img src={produto.imagem} width={45} />
             </td>
-            <td width="10%" className="align-middle text-center">
+            <td width="10%" className="align-middle text-center" style={{backgroundColor:"#DDDDDD"}}>
               {produto.categoria.nome}
             </td>
-            <td width="16%" className="align-middle text-center">
+            <td width="16%" className="align-middle text-center" style={{backgroundColor:"#DDDDDD"}}>
               <a
                 className="link-underline"
                 onClick={() => {
@@ -90,25 +91,25 @@ const TabelaDeProdutosPrivado = () => {
                 {produto.nome}
               </a>
             </td>
-            <td width="10%" className="align-middle text-center">
+            <td width="10%" className="align-middle text-center" style={{backgroundColor:"#DDDDDD"}}>
               {produto.tamanho}
             </td>
-            <td width="15%" className="align-middle text-center">
+            <td width="15%" className="align-middle text-center" style={{backgroundColor:"#DDDDDD"}}>
               {dayjs(produto.dataCadastro).format("DD/MM/YYYY")}
             </td>
-            <td width="12%" className="align-middle text-center">
+            <td width="12%" className="align-middle text-center" style={{backgroundColor:"#DDDDDD"}}>
               {produto.qtdEstoque.toLocaleString("pt-BR", {
                 useGrouping: true,
               })}
             </td>
-            <td width="10%" className="align-middle text-center pe-3">  
+            <td width="10%" className="align-middle text-center pe-3" style={{backgroundColor:"#DDDDDD"}}>  
               {produto.preco.toLocaleString("pt-BR", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
                 useGrouping: true,
               })}
             </td>
-            <td width="12%" className="align-middle text-center">
+            <td width="12%" className="align-middle text-center" style={{backgroundColor:"#DDDDDD"}}>
             <button id="btn" onClick={() => tratarRemocao(produto.id!) } className="btn btn-danger btn-sm" >
             {removerProduto.isPending && produto.id == identificador ? (
         <div className="spinner-active"></div>
@@ -120,10 +121,10 @@ const TabelaDeProdutosPrivado = () => {
         ))}
       </tbody>
       <tfoot>
-        <tr>
-          <td colSpan={4}></td>
-          <td className="align-middle text-center fw-bold">Total...</td>
-          <td className="align-middle text-center fw-bold" colSpan={2}>
+        <tr >
+          <td colSpan={4} style={{backgroundColor:"#CCCCCC"}}></td>
+          <td className="align-middle text-center fw-bold" style={{backgroundColor:"#CCCCCC"}}>Total</td>
+          <td className="align-middle text-center fw-bold" colSpan={2} style={{backgroundColor:"#CCCCCC"}}>
             R${" "}
             
             {produtos
@@ -134,7 +135,7 @@ const TabelaDeProdutosPrivado = () => {
                 useGrouping: true,
               })}
           </td>
-          <td></td>
+          <td style={{backgroundColor:"#CCCCCC"}}></td>
         </tr>
       </tfoot>
     </table>

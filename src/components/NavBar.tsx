@@ -47,31 +47,31 @@ function NavBar() {
           </div>
 
           <h5 className="col d-flex align-items-center">
-            <Link to="/catalogo" style={{ textDecoration: "none" }}>
+            <Link to="/catalogo" style={{ textDecoration: "none" , color: "#DDD"}}>
                   Catálogo
                 </Link>
             </h5>
 
             <h5 className="col d-flex align-items-center">
-            <Link to="/listar-produtos" style={{ textDecoration: "none" }}>
+            <Link to="/listar-produtos" style={{ textDecoration: "none" , color: "#DDD"}}>
                   Pesquisa
                 </Link>
             </h5>
 
             <h5 className="col d-flex align-items-center">
-            <Link to="/cadastrar-produto" style={{ textDecoration: "none" }}>
+            <Link to="/cadastrar-produto" style={{ textDecoration: "none" , color: "#DDD"}}>
                   Cadastro de Produtos
                 </Link>
             </h5>
 
             <h5 className="col d-flex align-items-center">
-              <Link to="/login" style={{textDecoration: "none"}}>
+              <Link to="/login" style={{textDecoration: "none", color: "#DDD"}}>
                 Login
               </Link>
             </h5>
 
             <h5 className="col">
-            <Link to="/carrinho" style={{ textDecoration: "none" }}>
+            <Link to="/carrinho" style={{ textDecoration: "none", color: "#DDD"}}>
                   <img className="d-none d-md-block" src={cart} style={{ width: "35px" }} />
                   Carrinho
                   <br></br>

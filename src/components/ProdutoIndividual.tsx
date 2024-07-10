@@ -38,6 +38,7 @@ const ProdutoIndividual = () => {
   }
 
 
+
   return (
     <>{data ? 
 (<div className="card">
@@ -82,7 +83,7 @@ const ProdutoIndividual = () => {
 </div>) : 
             (<div>
                 <h4 style={{textAlign:"center", marginTop:"80px"}}>Produto Removido</h4>
-                <Link to="/" style={{textAlign:"center", alignItems:"center", position:"absolute", top:"30%", left:"50%", transform: "translate(-50%, -50%)"}} className="btn btn-primary">Clique aqui para voltar para a tela inicial</Link>
+                <Link to="/catalogo" style={{textAlign:"center", alignItems:"center", position:"absolute", top:"30%", left:"50%", transform: "translate(-50%, -50%)"}} className="btn btn-primary">Clique aqui para voltar para o Catálogo</Link>
             </div>)}
 </>
     )

@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import {Button, Accordion, Card} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
@@ -9,11 +9,11 @@ const HomePage = () => {
     <div style={{ backgroundColor: 'rgb(124, 124, 124)' }}>
 
       <div className="row mb-4">
-      <img src="./banner_loja.jpg" style={{objectFit: "cover"}}></img>
+      <img src="./banner-loja.jpg" style={{objectFit: "cover"}}></img>
       <div style={{ padding: "10px" }}></div>
         <div className="col-lg-5 col-md-6 mx-auto mb-4 mr-3">
           <Card className="mb-3" style={{ backgroundColor: 'rgb(187, 187, 187)' }}>
-            <Card.Img variant="top" src="./roupa.jpg" alt="Roupas" />
+            <Card.Img variant="top" src="./roupavermelha.jpg" alt="Roupas" />
             <Card.Body>
               <div className="text-center">
                 <Card.Title>Roupas</Card.Title>
@@ -23,14 +23,14 @@ const HomePage = () => {
                 </Card.Text>
               </div>
               <div className="text-center">
-                <Button variant="warning" href="/catalogo/roupas">Mais informações</Button>
+              <Link className="btn btn-warning" to="/catalogo/roupas">Mais informações</Link>
               </div>
             </Card.Body>
           </Card>
         </div>
         <div className="col-lg-5 col-md-6 mx-auto">
           <Card className="mb-3" style={{ backgroundColor: 'rgb(187, 187, 187)' }}>
-            <Card.Img variant="top" src="./calca.jpg" alt="Calcas" />
+            <Card.Img variant="top" src="./calcaamarela.jpg" alt="Calcas" />
             <Card.Body>
               <div className="text-center">
                 <Card.Title>Calças</Card.Title>
@@ -40,14 +40,14 @@ const HomePage = () => {
                 </Card.Text>
               </div>
               <div className="text-center">
-                <Button variant="warning" href="/catalogo/calcas">Mais informações</Button>
+              <Link className="btn btn-warning" to="/catalogo/calcas">Mais informações</Link>
               </div>
             </Card.Body>
           </Card>
         </div>
         <div className="col-lg-5 col-md-6 mx-auto mt-4">
           <Card className="mb-3" style={{ backgroundColor: 'rgb(187, 187, 187)' }}>
-            <Card.Img variant="top" src="./acessorio.jpg" alt="Acessorios" />
+            <Card.Img variant="top" src="./anelbranco.jpg" alt="Acessorios" />
             <Card.Body>
               <div className="text-center">
                 <Card.Title>Acessórios</Card.Title>
@@ -57,7 +57,7 @@ const HomePage = () => {
                 </Card.Text>
               </div>
               <div className="text-center">
-                <Button variant="warning" href="/catalogo/acessorios">Mais informações</Button>
+                <Link className="btn btn-warning" to="/catalogo/acessorios">Mais informações</Link>
               </div>
             </Card.Body>
           </Card>
@@ -91,9 +91,9 @@ const HomePage = () => {
             <div className="col-xl-6 col-lg-6 col-sm-7">
               <h5>Nossos Produtos</h5>
               <ul className="list-unstyled">
-                <li><a href="/catalogo/roupas">Roupas e Vestidos</a></li>
-                <li><a href="/catalogo/calcas">Calças e Saias</a></li>
-                <li><a href="/catalogo/acessorios">Acessórios</a></li>
+                <li><Link to="/catalogo/roupas" style={{color:"#CCCCCC"}}>Roupas</Link></li>
+                <li><Link to="/catalogo/calcas" style={{color:"#CCCCCC"}}>Calças</Link></li>
+                <li><Link to="/catalogo/acessorios" style={{color:"#CCCCCC"}}>Acessórios</Link></li>
               </ul>
             </div>
             <div className="col-xl-6 col-lg-6 col-sm-5">
@@ -101,7 +101,7 @@ const HomePage = () => {
               <ul className="list-unstyled">
                 <li><i className="fas fa-phone"></i> (21) 2250-0125</li>
                 <li><i className="fas fa-phone"></i> (21) 91295-3002</li>
-                <li><i className="fas fa-envelope-square"></i> <a href="mailto:zxyzxy@gmail.com.br">zxyzxy@gmail.com.br</a></li>
+                <li><i className="fas fa-envelope-square"></i> <a href="mailto:zxyzxy@gmail.com.br" style={{color:"#CCCCCC"}}>zxyzxy@gmail.com.br</a></li>
               </ul>
             </div>
           </div>
