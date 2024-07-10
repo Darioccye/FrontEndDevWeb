@@ -87,7 +87,7 @@ const CarrinhoPage = () => {
 
   return (
     <div>
-    <table className="table table-responsive table-sm table-hover" style={{backgroundColor: 'rgb(123, 123, 123)'}}>
+    <table className="table table-responsive table-sm table-hover" style={{ backgroundColor: 'rgb(187, 187, 187)' }}>
           <thead>
             <tr>
             <th className="align-middle text-center">ID</th>
@@ -148,12 +148,13 @@ const CarrinhoPage = () => {
               </tr>
           </tfoot>
         </table>
+        <div style={{ padding: "10px" }}></div>
         <div className="row">
           <div className="col-6" style={{}}>
           <Link to="/" className="btn btn-primary btn-sm w-100" style={{}} > Voltar à Loja </Link>
         </div>
         <div className="col-6" style={{}}>
-          <a className="btn btn-primary btn-sm w-100"> Finalizar Compra </a>
+          <a className="btn btn-warning btn-sm w-100"> Finalizar Compra </a>
         </div>
         
         </div>

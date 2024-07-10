@@ -46,15 +46,21 @@ function NavBar() {
             </Link>
           </div>
 
+          <h5 className="col d-flex align-items-center">
+            <Link to="/catalogo" style={{ textDecoration: "none" }}>
+                  Catálogo
+                </Link>
+            </h5>
+
             <h5 className="col d-flex align-items-center">
             <Link to="/listar-produtos" style={{ textDecoration: "none" }}>
-                  Listar produtos
+                  Pesquisa
                 </Link>
             </h5>
 
             <h5 className="col d-flex align-items-center">
             <Link to="/cadastrar-produto" style={{ textDecoration: "none" }}>
-                  Cadastrar produto
+                  Cadastro de Produtos
                 </Link>
             </h5>
 

@@ -33,11 +33,11 @@ const TabelaDeProdutos = () => {
   }
 
   return (
-
-    <table className="table table-responsive table-sm table-hover table-bordered" style={{backgroundColor: 'rgb(123, 123, 123)'}}>
+    <div>
+    <table className="table table-responsive table-sm table-hover table-bordered">
       <thead>
         <tr>
-          <th className="align-middle text-center">Imagem</th>
+          <th className="align-middle text-center" >Imagem</th>
           <th className="align-middle text-center"><a onClick={() => filter(1)}>Categoria</a></th>
           <th className="align-middle text-center"><a onClick={() => filter(2)}>Nome </a></th>
           <th className="align-middle text-center">Tamanho</th>
@@ -80,6 +80,7 @@ const TabelaDeProdutos = () => {
         ))}
       </tbody>
     </table>
+    </div>
   );
 };
 

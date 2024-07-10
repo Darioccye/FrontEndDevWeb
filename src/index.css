@@ -27,9 +27,8 @@ div.error {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
-  
   body {
-    background: rgb(136, 128, 128);
+    background: rgb(143, 140, 140);
   }
 
 
@@ -37,4 +36,7 @@ div.error {
     background-color: #1f2023;
     color: #1f2023;
   }
-  
+
+  table {
+    background-color: gray;
+  }

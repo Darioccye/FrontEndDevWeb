@@ -4,6 +4,9 @@ import useProdutosPaginadosPorSlugDaCategoria from "../hooks/useProdutosPaginado
 import InfiniteScroll from "react-infinite-scroll-component";
 import useAdicionarCarrinho from "../hooks/useAdicionarCarrinho";
 import useUsuarioStore from "../store/usuarioStore";
+import useRecuperarCarrinho from "../hooks/useRecuperarCarrinho";
+import useRecuperarQuantidadeCarrinho from "../hooks/useRecuperarQuantidadeCarrinho";
+import Produto from "../interfaces/produto";
 
 const CardsDeProdutosPage = () => {
   const { slug } = useParams();
@@ -21,8 +24,36 @@ const CardsDeProdutosPage = () => {
     fetchNextPage
   } = useProdutosPaginadosPorSlugDaCategoria({ tamanho, slug });
 
+/*   const {
+    data: listaProdutos,
+    isPending: carregandoCarrinho,
+    error: errorCarrinho,
+  } = useRecuperarCarrinho(idUsuario);
+
+
+  const {
+    data: listaQuantidade,
+    isPending: carregandoQuantidade,
+    error: errorquantidade,
+  } = useRecuperarQuantidadeCarrinho(idUsuario);
+
+
+  if (carregandoQuantidade) return <h6>Carregando...</h6>;
+  if (errorquantidade) throw errorquantidade;
+
+  if (carregandoCarrinho) return <h6>Carregando...</h6>;
+  if (errorCarrinho) throw errorCarrinho;
+
+  const checaCarrinho = (produto: Produto) => {
+    if (listaProdutos.includes(produto)){
+      return true
+    }
+    return false
+    } */
+
   if (carregandoProdutos) return <h6>Carregando...</h6>;
   if (errorprodutos) throw errorprodutos;
+
 
   const tratarAdicao = (idProduto: number) => {
     addProduto.mutate(idProduto);

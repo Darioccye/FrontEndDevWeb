@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import CarrinhoPage from '../pages/CarrinhoPage';
+import CatalogoPage from '../pages/CatalogoPage';
 import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import Layout from './Layout';
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
         {
           path: "",
           element: <HomePage />,
+        },
+        {
+          path: "catalogo",
+          element: <CatalogoPage/>,
           children: [
             {
               path: ":slug?",

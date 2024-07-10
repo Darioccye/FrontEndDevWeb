@@ -14,7 +14,7 @@ interface Props {
 const Card = ({id, imagem, titulo, descricao, preco, tamanho, footer }: Props) => {
   return (
     <div className="card h-100 border-0">
-      <img src={imagem} className="card-img-top" alt={titulo} />
+      <img src={"../" + imagem} className="card-img-top" alt={titulo} />
       <div className="card-body">
         <h5 className="card-title">
           <Link to={'/produtos/' + id}>{titulo}</Link>
