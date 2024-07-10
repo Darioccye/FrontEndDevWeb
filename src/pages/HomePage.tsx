@@ -1,7 +1,6 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
-import {Button, Accordion, Card} from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import {Accordion, Card} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
 
 
 const HomePage = () => {
@@ -117,31 +116,3 @@ const HomePage = () => {
 } 
 export default HomePage;
 
-
-
-/*     <div className="col">
-      <img src="./tecido-preto.jpg" style={{width: "1300px"}}>
-      </img>
-    <div className="row">
-      <div className="col-lg-2">
-        <h5>Categorias</h5>
-        <div className="nav flex-column nav-pills">
-          <NavLink aria-current="page" className="nav-link" to="/">
-            Todos
-          </NavLink>
-          <NavLink aria-current="page" className="nav-link" to="/calcas">
-            Calças
-          </NavLink>
-          <NavLink aria-current="page" className="nav-link" to="/roupas">
-            Roupas
-          </NavLink>
-          <NavLink aria-current="page" className="nav-link" to="/acessorios">
-            Acessórios
-          </NavLink>
-        </div>
-      </div>
-      <div className="col-lg-10">
-        <Outlet />
-      </div>
-    </div>
-    </div> */

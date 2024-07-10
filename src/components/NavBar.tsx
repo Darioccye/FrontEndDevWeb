@@ -34,7 +34,8 @@ function NavBar() {
   if (carregandoProdutos) return <h6>Carregando...</h6>;
   if (errorProdutos) throw errorProdutos;
 
-  const produtos = resultadoPaginado.itens;
+  if (carregandoTotal) return <h6>Carregando...</h6>;
+  if (errortotal) throw errortotal;
 
   return (
     <>

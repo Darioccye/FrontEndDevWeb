@@ -6,14 +6,13 @@ import useSubtrairCarrinho from "../hooks/useSubtrairCarrinho";
 import useRemoverCarrinho from "../hooks/useRemoverCarrinho";
 import useTotalCarrinho from "../hooks/useTotalCarrinho";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCirclePlus, faCircleMinus, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faCirclePlus, faCircleMinus, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
 
 
 
 const CarrinhoPage = () => {
   const idUsuario = useUsuarioStore((s) => s.idUsuario);
-  // const produtosCarrinho = useRecuperarCarrinho()
   const subProduto = useSubtrairCarrinho(idUsuario)
   const addProduto = useAdicionarCarrinho(idUsuario)
   const remProduto = useRemoverCarrinho(idUsuario)
@@ -94,6 +93,7 @@ const CarrinhoPage = () => {
               <th className="align-middle text-center"style={{backgroundColor:"#CCCCCC"}}>Quantidade</th>
               <th className="align-middle text-center" style={{backgroundColor:"#CCCCCC"}}>Preço Unitário</th>
               <th className="align-middle text-center" style={{backgroundColor:"#CCCCCC"}}>Preço Total</th>
+              <th className="align-middle text-center" style={{backgroundColor:"#CCCCCC"}}>Remover</th>
             </tr>
           </thead>
           <tbody>
@@ -128,10 +128,13 @@ const CarrinhoPage = () => {
                     useGrouping: true,
                   })}
                 </td>
+                <td width="15%" className="align-middle text-center"style={{backgroundColor:"#DDDDDD"}}>
+                  <a className="btn btn-danger" onClick={() => removerProduto(produto.id!)}><FontAwesomeIcon icon={faTrash}/></a>
+                </td>
               </tr>
             ))}
           </tbody>
-          <tfoot style= {{transform:"translateX(65%)"}}>
+          <tfoot style= {{transform:"translateX(61%)"}}>
             <tr>
             <td style={{fontWeight:"bold", fontSize: "25px", backgroundColor:"#CCCCCC"}}>
               Total: 

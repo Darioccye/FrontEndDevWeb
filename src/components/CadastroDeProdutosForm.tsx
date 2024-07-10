@@ -202,12 +202,9 @@ const CadastroDeProdutosForm = () => {
                 }
               >
                 <option value="0">Selecione uma categoria</option>
-                <option value="1">Fruta</option>
-                <option value="2">Legume</option>
-                <option value="3">Verdura</option>
-                <option value="4">Calça</option>
-                <option value="5">Roupa</option>
-                <option value="6">Acessório</option>
+                <option value="1">Calça</option>
+                <option value="2">Roupa</option>
+                <option value="3">Acessório</option>
               </select>
               <div className="invalid-feedback">{errors.categoria?.message}</div>
             </div>
