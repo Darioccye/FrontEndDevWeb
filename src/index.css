@@ -28,3 +28,13 @@ div.error {
     100% { transform: rotate(360deg); }
   }
   
+  body {
+    --color-background: #fafafa;
+    --color-foreground: #1f2023;
+  }
+
+  .App-header {
+    background-color: #1f2023;
+    color: #1f2023;
+  }
+  

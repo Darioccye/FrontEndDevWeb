@@ -11,10 +11,15 @@ const useRemoverProduto = () => {
   return useMutation({
     mutationFn: (id: number) => remover(id),
 
-    onSuccess: () =>
+    onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["produtos"],
-      }),
+        queryKey: ["produtos"]
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["carrinho"]
+      })
+    }
+    
   });
 };
 export default useRemoverProduto;

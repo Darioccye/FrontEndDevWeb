@@ -10,10 +10,14 @@ const useAlterarProduto = () => {
 
   return useMutation({
     mutationFn: (produto: Produto) => alterar(produto),
-    onSuccess: () =>
+    onSuccess: () =>{
       queryClient.invalidateQueries({
         queryKey: ["produtos"],
-      }),
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["carrinho"]
+      })
+    }
   });
 };
 export default useAlterarProduto;
