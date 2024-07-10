@@ -11,7 +11,7 @@ const useAPICarrinho = (endpoint: string) => {
     });
 
     const recuperarProdutosCarrinho = (idUsuario: number) => axiosInstance
-        .get(endpoint + "/" + idUsuario)
+        .get<Produto[]>(endpoint + "/" + idUsuario)
         .then((response) => response.data)
         .catch((error) => {
             if (error.response) {
@@ -50,6 +50,25 @@ const useAPICarrinho = (endpoint: string) => {
             }
         })
 
+        const recuperarTotalCarrinho = (idUsuario: number) => axiosInstance
+        .get(endpoint + "/total/" + idUsuario)
+        .then((response) => response.data)
+        .catch((error) => {
+            if (error.response) {
+                throw new CustomError(
+                    error.response.data.message,
+                    error.response.data.errorCode);
+                // significa servidor respondeu
+            }
+            else if(error.request) {
+                throw error;
+                // significa que o servidor não respondeu
+            }
+            else {
+                throw error;
+                // erro desconhecido
+            }
+        })
 
     const removerCarrinho = (idUsuario: number, idProduto: number) => axiosInstance
         .delete(endpoint + "/" + idUsuario + "/" + idProduto)
@@ -121,6 +140,6 @@ const useAPICarrinho = (endpoint: string) => {
         })
 
 
-    return {recuperarProdutosCarrinho, recuperarQuantidadeCarrinho, removerCarrinho, adicionarCarrinho, subtrairCarrinho}    
+    return {recuperarProdutosCarrinho, recuperarQuantidadeCarrinho, recuperarTotalCarrinho, removerCarrinho, adicionarCarrinho, subtrairCarrinho}    
 }
 export default useAPICarrinho

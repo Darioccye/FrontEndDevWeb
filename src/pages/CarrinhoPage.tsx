@@ -5,17 +5,18 @@ import useAdicionarCarrinho from "../hooks/useAdicionarCarrinho";
 import useSubtrairCarrinho from "../hooks/useSubtrairCarrinho";
 import useRemoverCarrinho from "../hooks/useRemoverCarrinho";
 import { useState } from "react";
-
+import Card from "../components/Card";
+import dayjs from "dayjs";
+import useTotalCarrinho from "../hooks/useTotalCarrinho";
+import Produto from "../interfaces/produto";
 
 const CarrinhoPage = () => {
   const idUsuario = useUsuarioStore((s) => s.idUsuario);
-  const recuperarCarrinho = useRecuperarCarrinho(idUsuario);
- /*  const [idProduto, setIdProduto] = useState(0); */
-  const recuperarQuantidade = useRecuperarQuantidadeCarrinho(idUsuario);
   // const produtosCarrinho = useRecuperarCarrinho()
   const subProduto = useSubtrairCarrinho(idUsuario)
   const addProduto = useAdicionarCarrinho(idUsuario)
   const remProduto = useRemoverCarrinho(idUsuario)
+  let indiceProduto = 0
 
   const tratarAdicao = (idProduto: number) =>{
     addProduto.mutate(idProduto)
@@ -29,6 +30,8 @@ const CarrinhoPage = () => {
     remProduto.mutate(idProduto)
   }
 
+
+
   const {
     data: listaProdutos,
     isPending: carregandoProdutos,
@@ -36,10 +39,20 @@ const CarrinhoPage = () => {
   } = useRecuperarCarrinho(idUsuario);
 
   const {
+    data: totalCarrinho,
+    isPending: carregandoTotal,
+    error: errortotal,
+  } = useTotalCarrinho(idUsuario)
+
+  const {
     data: listaQuantidade,
     isPending: carregandoQuantidade,
     error: errorquantidade,
   } = useRecuperarQuantidadeCarrinho(idUsuario);
+
+
+  if (carregandoTotal) return <h6>Carregando...</h6>;
+  if (errortotal) throw errortotal;
 
   if (carregandoProdutos) return <h6>Carregando...</h6>;
   if (errorprodutos) throw errorprodutos;
@@ -64,25 +77,94 @@ const CarrinhoPage = () => {
     console.log(listaQuantidade)
   }
 
+  console.log(listaQuantidade[0])
+
+  function tabela(produto: Produto){
+    indiceProduto = indiceProduto + 1
+    return <tr key={produto.id}>
+        <td width="18%" className="align-middle text-center">
+          <img src={produto.imagem} width={100} />
+        </td>
+        <td width="20%" className="align-middle text-center">
+            {produto.nome}
+        </td>
+        <td width="10%" className="align-middle text-center">
+          {produto.tamanho}
+        </td>
+        <td width="12%" className="align-middle text-center">
+          {listaQuantidade[indiceProduto].toLocaleString("pt-BR", {
+            useGrouping: true,
+          })}
+        </td>
+        <td width="20%" className="align-middle text-center">
+            {totalCarrinho}
+        </td>
+        <td width="10%" className="align-middle text-center pe-3">  
+          {produto.preco.toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+            useGrouping: true,
+          })}
+        </td>
+      </tr>
+    }
 
   return (
-    <div>
-      
-  <h4 className="text-center" >Você está quase terminando! Verifique seus produtos e finalize a sua compra</h4>
 
-
-  <div className="list-group mx-auto" >
-    <a onClick={() => subtrairProduto(1)} className="list-group-item list-group-item-action  " aria-current="true">
-      Produto 1
-    </a>
-    <a onClick={() => adicionarProduto(2)} className="list-group-item list-group-item-action">Produto 2</a>
-    <a onClick={() => removerProduto(2)} className="list-group-item list-group-item-action">Produto 3</a>
-    <a onClick={() => adicionarProduto(3)} className="list-group-item list-group-item-action">Produto 4</a>
-    <a onClick={() => printCarrinho()} className="list-group-item list-group-item-action">Produto 4</a>
-    <a className="list-group-item list-group-item-action disabled" aria-disabled="true">Produto Indisponível  :( </a>
-  </div>
-
-  </div>
-  );
+<table className="table table-responsive table-sm table-hover">
+      <thead>
+        <tr>
+          <th className="align-middle text-center"></th>
+          <th className="align-middle text-center">Nome</th>
+          <th className="align-middle text-center">Tamanho</th>
+          <th className="align-middle text-center">Quantidade</th>
+          <th className="align-middle text-center" >Preço</th>
+           <th className="align-middle text-center" >Preço</th>
+        </tr>
+      </thead>
+      <tbody>
+        {listaProdutos.map((produto) => (
+          <tr key={produto.id}>
+            <td width="18%" className="align-middle text-center">
+              <img src={produto.imagem} width={100} />
+            </td>
+            <td width="20%" className="align-middle text-center">
+                {produto.nome}
+            </td>
+            <td width="10%" className="align-middle text-center">
+              {produto.tamanho}
+            </td>
+            <td width="12%" className="align-middle text-center">
+              {listaQuantidade[indiceProduto].toLocaleString("pt-BR", {
+                useGrouping: true,
+              })}
+            </td>
+            <td width="20%" className="align-middle text-center">
+                {totalCarrinho}
+            </td>
+            <td width="10%" className="align-middle text-center pe-3">  
+              {produto.preco.toLocaleString("pt-BR", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+                useGrouping: true,
+              })}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+      <tfoot style= {{transform:"translateX(70%)"}}>
+        <td style={{fontWeight:"bold", fontSize: "25px"}}>
+          Total: 
+        </td>
+        <td style={{fontWeight:"bold", fontSize: "25px"}}>
+          R$ {totalCarrinho.toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+            useGrouping: true,
+          })}
+          </td>
+      </tfoot>
+    </table>
+  )
 };
 export default CarrinhoPage;
