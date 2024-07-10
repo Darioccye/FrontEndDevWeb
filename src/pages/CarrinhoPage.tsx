@@ -87,7 +87,7 @@ const CarrinhoPage = () => {
 
   return (
     <div>
-    <table className="table table-responsive table-sm table-hover">
+    <table className="table table-responsive table-sm table-hover" style={{backgroundColor: 'rgb(123, 123, 123)'}}>
           <thead>
             <tr>
             <th className="align-middle text-center">ID</th>

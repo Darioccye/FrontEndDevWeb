@@ -77,7 +77,7 @@ function NavBar() {
         </div>
       </div>
 
-      <div className="bg-danger" style={{ padding: "3px" }}></div>
+      <div className="bg-dark" style={{ padding: "3px" }}></div>
     </>
   );
 }

@@ -34,7 +34,7 @@ const TabelaDeProdutos = () => {
 
   return (
 
-    <table className="table table-responsive table-sm table-hover table-bordered">
+    <table className="table table-responsive table-sm table-hover table-bordered" style={{backgroundColor: 'rgb(123, 123, 123)'}}>
       <thead>
         <tr>
           <th className="align-middle text-center">Imagem</th>

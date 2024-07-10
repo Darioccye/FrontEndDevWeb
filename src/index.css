@@ -29,9 +29,9 @@ div.error {
   }
   
   body {
-    --color-background: #fafafa;
-    --color-foreground: #1f2023;
+    background: rgb(136, 128, 128);
   }
+
 
   .App-header {
     background-color: #1f2023;
