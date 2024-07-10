@@ -93,6 +93,7 @@ const CarrinhoPage = () => {
               <th className="align-middle text-center">Tamanho</th>
               <th className="align-middle text-center">Quantidade</th>
               <th className="align-middle text-center" >Preço</th>
+              <th className="align-middle text-center" >Total</th>
             </tr>
           </thead>
           <tbody>
@@ -113,8 +114,15 @@ const CarrinhoPage = () => {
                    <a onClick={() => adicionarProduto(indice+1)}><FontAwesomeIcon icon={faCirclePlus}/>
                     </a> 
                 </td>
-                <td width="10%" className="align-middle text-center pe-3">  
+                <td width="10%" className="align-middle text-center">  
                   {produto.preco.toLocaleString("pt-BR", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                    useGrouping: true,
+                  })}
+                </td>
+                <td width="12%" className="align-middle text-center">
+                  {(produto.preco*listaQuantidade[indice]).toLocaleString("pt-BR", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                     useGrouping: true,
@@ -123,7 +131,7 @@ const CarrinhoPage = () => {
               </tr>
             ))}
           </tbody>
-          <tfoot style= {{transform:"translateX(66%)"}}>
+          <tfoot style= {{transform:"translateX(71%)"}}>
             <td style={{fontWeight:"bold", fontSize: "25px"}}>
               Total: 
             </td>
