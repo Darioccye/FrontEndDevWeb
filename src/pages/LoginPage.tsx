@@ -1,6 +1,10 @@
 import LoginForm from "../components/LoginForm";
+import useUsuarioStore from "../store/usuarioStore";
 
 const LoginPage = () => {
+  const usuario = useUsuarioStore((s) => (s).setIdUsuario)
+  usuario(0)
+  
   return (
     <>
       <div className="mb-4">

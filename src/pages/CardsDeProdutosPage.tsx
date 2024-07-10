@@ -2,10 +2,17 @@ import { useParams } from "react-router-dom";
 import Card from "../components/Card";
 import useProdutosPaginadosPorSlugDaCategoria from "../hooks/useProdutosPaginadosPorSlugDaCategoria";
 import InfiniteScroll from "react-infinite-scroll-component";
+import useAdicionarCarrinho from "../hooks/useAdicionarCarrinho";
+import useUsuarioStore from "../store/usuarioStore";
 
 const CardsDeProdutosPage = () => {
   const { slug } = useParams();
   const tamanho = 12;
+  const idUsuario = useUsuarioStore((s) => (s).idUsuario)
+  const addProduto  = useAdicionarCarrinho(idUsuario);
+
+
+
   const {
     data,
     isPending: carregandoProdutos,
@@ -16,6 +23,10 @@ const CardsDeProdutosPage = () => {
 
   if (carregandoProdutos) return <h6>Carregando...</h6>;
   if (errorprodutos) throw errorprodutos;
+
+  const tratarAdicao = (idProduto: number) => {
+    addProduto.mutate(idProduto);
+  }
 
   return (
     <InfiniteScroll
@@ -40,7 +51,7 @@ const CardsDeProdutosPage = () => {
                   useGrouping: true,
                 })}
                 footer={
-                  <input type="button" className="btn btn-primary btn-sm w-100" value="Comprar" />
+                  <input type="button" className="btn btn-primary btn-sm w-100" value="Comprar" onClick={() => tratarAdicao(produto.id!)}/>
                 }
               />
             </div>

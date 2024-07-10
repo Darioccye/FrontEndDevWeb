@@ -3,18 +3,33 @@ import cart from "/shoppingcart.png"
 import roupaLogo from "/roupa-logo.png"
 import useProdutosComPaginacao from "../hooks/useProdutosComPaginacao";
 import useProdutoStore from "../store/produtoStore";
+import useTotalCarrinho from "../hooks/useTotalCarrinho";
+import useUsuarioStore from "../store/usuarioStore";
 
 function NavBar() {
   const pagina = useProdutoStore((s) => s.pagina);
   const tamanho = useProdutoStore((s) => s.tamanho);
   const nome = useProdutoStore((s) => s.nome);
   const filtro = useProdutoStore((s) => s.filtro);
+  const idUsuario = useUsuarioStore((s) => s.idUsuario)
 
   const {
     data: resultadoPaginado,
     isPending: carregandoProdutos,
     error: errorProdutos,
   } = useProdutosComPaginacao({ pagina, tamanho, nome , filtro});
+
+  const {
+    data: totalCarrinho,
+    isPending: carregandoTotal,
+    error: errortotal,
+  } = useTotalCarrinho(idUsuario)
+
+  const totalFormatado = totalCarrinho !== undefined ? totalCarrinho.toLocaleString("pt-BR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+    useGrouping: true,
+  }): '';
 
   if (carregandoProdutos) return <h6>Carregando...</h6>;
   if (errorProdutos) throw errorProdutos;
@@ -56,13 +71,7 @@ function NavBar() {
                   <br></br>
                 </Link>
                 R${" "}
-                {produtos
-                  .reduce((total, produto) => total + produto.qtdEstoque * produto.preco, 0)
-                  .toLocaleString("pt-BR", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                    useGrouping: true,
-                  })}
+                {totalFormatado}
             </h5>
 
         </div>
