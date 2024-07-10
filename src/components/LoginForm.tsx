@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import loginIcon from "../assets/skin/login.png";
 import Usuario from "../interfaces/usuario";
-import TokenResponse from "../interfaces/tokenResponse";
 import useEfetuarLogin from "../hooks/useEfetuarLogin";
 
 const schema = z.object({

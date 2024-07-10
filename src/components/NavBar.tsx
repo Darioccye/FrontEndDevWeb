@@ -14,7 +14,6 @@ function NavBar() {
   const idUsuario = useUsuarioStore((s) => s.idUsuario)
 
   const {
-    data: resultadoPaginado,
     isPending: carregandoProdutos,
     error: errorProdutos,
   } = useProdutosComPaginacao({ pagina, tamanho, nome , filtro});
