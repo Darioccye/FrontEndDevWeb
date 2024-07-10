@@ -88,6 +88,7 @@ const CarrinhoPage = () => {
     <table className="table table-responsive table-sm table-hover">
           <thead>
             <tr>
+            <th className="align-middle text-center">ID</th>
               <th className="align-middle text-center"></th>
               <th className="align-middle text-center">Nome</th>
               <th className="align-middle text-center">Tamanho</th>
@@ -100,6 +101,9 @@ const CarrinhoPage = () => {
             {listaProdutos.map((produto, indice) => (
               <tr key={produto.id}>
                 <td width="10%" className="align-middle text-center">
+                    {produto.id}
+                </td>
+                <td width="10%" className="align-middle text-center">
                   <img src={produto.imagem} width={100} />
                 </td>
                 <td width="10%" className="align-middle text-center">
@@ -109,9 +113,9 @@ const CarrinhoPage = () => {
                   {produto.tamanho}
                 </td>
                 <td width="12%" className="align-middle text-center">
-                 <a onClick={() => subtrairProduto(indice+1)}><FontAwesomeIcon icon={faCircleMinus}/></a>
+                 <a onClick={() => subtrairProduto(produto.id!)}><FontAwesomeIcon icon={faCircleMinus}/></a>
                      {listaQuantidade[indice]}                     
-                   <a onClick={() => adicionarProduto(indice+1)}><FontAwesomeIcon icon={faCirclePlus}/>
+                   <a onClick={() => adicionarProduto(produto.id!)}><FontAwesomeIcon icon={faCirclePlus}/>
                     </a> 
                 </td>
                 <td width="10%" className="align-middle text-center">  
